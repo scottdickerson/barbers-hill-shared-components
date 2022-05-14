@@ -6,6 +6,10 @@ const url = require('@rollup/plugin-url');
 
 module.exports = {
   rollup(config, options) {
+    if (config.output.format === 'umd') {
+      delete config.external;
+    }
+
     config.plugins = [
       postcss({
         plugins: [
@@ -23,7 +27,6 @@ module.exports = {
       url({ include: ['**/*.ttf', '**/*.otf', '**/*.woff2'] }),
       ...config.plugins,
     ];
-
     return config;
   },
 };

@@ -1,0 +1,18 @@
+@font-face {
+  font-family: Avenir;
+  src: url('./Avenir-Medium-09.ttf');
+}
+
+@font-face {
+  font-family: AvenirBlack;
+  src: url('./Avenir-Black-03.ttf');
+}
+
+@font-face {
+  font-family: Acumin;
+  src: url('./Acumin-Pro.ttf');
+}
+@font-face {
+  font-family: AcuminExtraCondensed;
+  src: url('./Acumin-Pro-ExtraCond-Medium.otf');
+}

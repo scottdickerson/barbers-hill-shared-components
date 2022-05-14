@@ -1,7 +1,19 @@
 # Customization
 
-https://www.npmjs.com/package/@rollup/plugin-image
-https://github.com/jaredpalmer/tsdx#example-adding-postcss
+- https://github.com/jaredpalmer/tsdx/issues/379
+- https://www.npmjs.com/package/@rollup/plugin-image
+- https://github.com/jaredpalmer/tsdx#example-adding-postcss
+  See tsdx.config.js for detailed configuration
+
+  https://github.com/jaredpalmer/tsdx/issues/179
+
+## Consuming the fonts in this package:
+
+import "@scottdickerson/barbers-hill-shared-components/dist/fonts/fonts.css";
+
+## Publishing this package
+
+https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry
 
 # TSDX React w/ Storybook User Guide
 

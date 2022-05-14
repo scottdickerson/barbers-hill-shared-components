@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "tsdx build && cp -R ./src/fonts ./dist",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
@@ -35,9 +35,13 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "barbers-hill-shared-components",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "name": "@scottdickerson/barbers-hill-shared-components",
   "author": "Scott Dickerson",
   "module": "dist/barbers-hill-shared-components.esm.js",
+  "repository": "git://github.com/scottdickerson/barbers-hill-shared-components.git",
   "size-limit": [
     {
       "path": "dist/barbers-hill-shared-components.cjs.production.min.js",
@@ -50,6 +54,7 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.17.10",
+    "@rollup/plugin-image": "^2.1.1",
     "@rollup/plugin-url": "^7.0.0",
     "@size-limit/preset-small-lib": "^7.0.8",
     "@storybook/addon-essentials": "^6.4.22",
@@ -75,6 +80,6 @@
   },
   "dependencies": {
     "@emotion/css": "^11.9.0",
-    "@rollup/plugin-image": "^2.1.1"
+    "@emotion/react": "^11.9.0"
   }
 }
