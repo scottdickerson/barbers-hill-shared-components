@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import teamsHeader from '../../images/12.3-2A-Teams-TopSection.png';
+import specialRecognition from '../../images/11.3-3D-SpecialHonoree-Bug.png';
+import closeButton from '../../images/11.3-Close-Button.png';
 import { css } from '@emotion/css';
 
 const barbersHillDetailsHeaderStyles = css`
@@ -10,10 +12,30 @@ const barbersHillDetailsHeaderStyles = css`
     max-width: 1080px;
   }
 `;
-
-const barbersHillDetailsHeaderTextStyles = css`
+const barbersHillSpecialRecognitionStyles = css`
   position: absolute;
-  top: 132px;
+  top: 0;
+  margin: auto;
+`;
+
+const barbersHillCloseButtonStyles = css`
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  margin: auto;
+  background-color: unset;
+  img {
+    height: 100px;
+  }
+`;
+
+const barbersHillDetailsHeaderTextStyles = ({
+  showSubtitle,
+}: {
+  showSubtitle: boolean;
+}) => css`
+  position: absolute;
+  top: ${showSubtitle ? 132 : 178}px;
   width: 100%;
   display: flex;
   flex-flow: column;
@@ -38,15 +60,36 @@ export interface BarbersHillDetailsHeaderProps {
   title?: string;
   subtitle?: string;
   details?: string;
+  isSpecialRecognition?: boolean;
+  onClose?: () => void;
 }
 export const BarbersHillDetailsHeader: FC<BarbersHillDetailsHeaderProps> = ({
   title,
   subtitle,
   details,
+  isSpecialRecognition,
+  onClose,
 }) => {
   return (
     <header className={barbersHillDetailsHeaderStyles}>
-      <div className={barbersHillDetailsHeaderTextStyles}>
+      {isSpecialRecognition ? (
+        <img
+          src={specialRecognition}
+          alt="Special Recognition"
+          className={barbersHillSpecialRecognitionStyles}
+        ></img>
+      ) : null}
+      {onClose ? (
+        <button className={barbersHillCloseButtonStyles} onClick={onClose}>
+          <img src={closeButton} alt="Close"></img>
+        </button>
+      ) : null}
+
+      <div
+        className={barbersHillDetailsHeaderTextStyles({
+          showSubtitle: !!subtitle,
+        })}
+      >
         {title && details ? (
           <>
             <span className={barbersHillDetailsHeaderTopTextStyles}>

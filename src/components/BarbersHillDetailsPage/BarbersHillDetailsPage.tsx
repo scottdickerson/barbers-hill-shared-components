@@ -14,5 +14,5 @@ const detailsPageStyles = css`
 export const BarbersHillDetailsPage = ({
   children,
 }: React.PropsWithChildren<{}>) => {
-  <div className={detailsPageStyles}>{children}</div>;
+  return <div className={detailsPageStyles}>{children}</div>;
 };
