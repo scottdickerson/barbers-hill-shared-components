@@ -25,7 +25,7 @@ const barbersHillCloseButtonStyles = css`
   margin: auto;
   background-color: unset;
   img {
-    height: 72px;
+    height: 48px;
   }
 `;
 
