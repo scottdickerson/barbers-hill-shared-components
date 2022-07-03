@@ -66,17 +66,22 @@ export const useReturnUnlessTouch = ({
   );
 };
 
-export interface UseTouchOnlyAfterScrollingFinishesArgs {
-  scrollCheckTimeout: number;
+export interface UseOnScrollArgs {
+  scrollCheckTimeout?: number;
+  onScrollFinished?: () => void;
+  onScrollStarted?: () => void;
 }
 
-export interface UseTouchOnlyAfterScrollingFinishesReturn {
+export interface UseOnScrollReturn {
+  // Attach the handleScroll to your onScroll property on the element you want to listen to
   handleScroll: ReactEventHandler<UIEvent>;
   isScrolling: boolean;
 }
-export const useTouchOnlyAfterScrollingFinishes = ({
+export const useOnScrollListener = ({
   scrollCheckTimeout = 350,
-}: UseTouchOnlyAfterScrollingFinishesArgs): UseTouchOnlyAfterScrollingFinishesReturn => {
+  onScrollFinished,
+  onScrollStarted,
+}: UseOnScrollArgs): UseOnScrollReturn => {
   const [isScrolling, setIsScrolling] = useState(false);
   const lastScrollEventTime = useRef<number>();
 
@@ -89,6 +94,9 @@ export const useTouchOnlyAfterScrollingFinishes = ({
       ) {
         console.log('detected scroll finished');
         setIsScrolling(false);
+        if (onScrollFinished) {
+          onScrollFinished();
+        }
       }
     };
     const scrollCheckTimer = setInterval(isScrollFinished, scrollCheckTimeout);
@@ -101,6 +109,9 @@ export const useTouchOnlyAfterScrollingFinishes = ({
       if (!isScrolling) {
         console.log('detected scroll started');
         setIsScrolling(true);
+        if (onScrollStarted) {
+          onScrollStarted();
+        }
       }
       lastScrollEventTime.current = Date.now();
     }, scrollCheckTimeout),
