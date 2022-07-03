@@ -80,6 +80,6 @@
   },
   "dependencies": {
     "@emotion/css": "^11.9.0",
-    "@emotion/react": "^11.9.0"
+    "@emotion/react": "^11.9.3"
   }
 }
