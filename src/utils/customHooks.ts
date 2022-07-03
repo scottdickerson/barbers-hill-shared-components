@@ -1,4 +1,11 @@
-import { useEffect, useState, useLayoutEffect, useRef } from 'react';
+import {
+  useEffect,
+  useState,
+  useLayoutEffect,
+  useRef,
+  ReactEventHandler,
+} from 'react';
+import { throttle } from 'lodash';
 
 export function useTimeout(
   callback: () => void,
@@ -57,4 +64,46 @@ export const useReturnUnlessTouch = ({
     timeout,
     currentTimeoutId.toString()
   );
+};
+
+export interface UseTouchOnlyAfterScrollingFinishesArgs {
+  scrollCheckTimeout: number;
+}
+
+export interface UseTouchOnlyAfterScrollingFinishesReturn {
+  handleScroll: ReactEventHandler<UIEvent>;
+  isScrolling: boolean;
+}
+export const useTouchOnlyAfterScrollingFinishes = ({
+  scrollCheckTimeout = 350,
+}: UseTouchOnlyAfterScrollingFinishesArgs): UseTouchOnlyAfterScrollingFinishesReturn => {
+  const [isScrolling, setIsScrolling] = useState(false);
+  const lastScrollEventTime = useRef<number>();
+
+  useEffect(() => {
+    const isScrollFinished = () => {
+      if (
+        isScrolling &&
+        Date.now() - scrollCheckTimeout >
+          (lastScrollEventTime?.current || Date.now())
+      ) {
+        console.log('detected scroll finished');
+        setIsScrolling(false);
+      }
+    };
+    const scrollCheckTimer = setInterval(isScrollFinished, scrollCheckTimeout);
+    return () => clearInterval(scrollCheckTimer);
+  }, [isScrolling, scrollCheckTimeout]);
+
+  // check scroll started every second to see if it's finished
+  return {
+    handleScroll: throttle(() => {
+      if (!isScrolling) {
+        console.log('detected scroll started');
+        setIsScrolling(true);
+      }
+      lastScrollEventTime.current = Date.now();
+    }, scrollCheckTimeout),
+    isScrolling,
+  };
 };
