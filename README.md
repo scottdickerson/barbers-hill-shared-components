@@ -13,6 +13,8 @@ import "@scottdickerson/barbers-hill-shared-components/dist/fonts/fonts.css";
 
 ## Publishing this package
 
+Set a local environment variable NPM_TOKEN that is a Github PAT with access to write to repos
+
 https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry
 
 # TSDX React w/ Storybook User Guide
