@@ -84,6 +84,6 @@
     "@emotion/react": "^11.9.0",
     "@testing-library/react": "13.4.0",
     "lodash": "^4.17.21",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.22"
   }
 }
